@@ -62,18 +62,22 @@ def GenerateFiles(inDir,outDir,ef):
                 nOutFile = nOutFile + 1
                 nStrOutFile = str(nOutFile).zfill(zNum)
                 outFileName = title+'_%s.hepevt' %nStrOutFile
+                sys.stdout.write('\rWriting file %i of %i.' %(nOutFile,nf))
+                sys.stdout.flush()
                 outFilePath = dirName+'/'+outFileName
                 fOut = open(outFilePath,'w')
                 fList.write(outFilePath+'\n')
                 fOut.write(line)
                 nEvent = 1
+        sys.stdout.write('\r\033[K'+'File splitted.'+'\n')
+
 
 def main():
     # Parser snippet
     path = os.path.dirname(os.path.realpath(__file__))
     parser = argparse.ArgumentParser()
     parser.add_argument('-i','--input', required=False, default=path+'/Originals', help='Directory containing input files', type=str)
-    parser.add_argument('-o','--output', required=False, default=path+'/Output', help='Output directory', type=str)
+    parser.add_argument('-o','--output', required=False, default='/pnfs/uboone/scratch/users/sporzio/GridFiles/HeavySterileNeutrinos/TextFiles/', help='Output directory', type=str)
     parser.add_argument('-ef','--eventsPerFile', required=False, default=20, help='Number of events in each file (must be a divisor of total number of events)', type=int)
 
     args = parser.parse_args()

@@ -7,7 +7,7 @@ def Warning(string):
 
 Warning('Generating xml files...')
 path = os.path.dirname(os.path.realpath(__file__))
-inDir = path+'/../TextFiles/Output'
+inDir = '/pnfs/uboone/scratch/users/sporzio/GridFiles/HeavySterileNeutrinos/TextFiles'
 outDir = path+'/Output'
 
 fileNames = os.listdir(inDir)
@@ -35,4 +35,4 @@ for inFileName,inFilePath in zip(fileNames,filePaths):
     outName = 'gridSettings_channel%i_mass%g_n%i_nf%i_ef%i.xml' %(channel,mass,n,nf,ef)
     fOut = open(outDir+'/'+outName,'w')
     fOut.write(textOut)
-    launcher.write('project.py --xml Xml/Output/gridSettings_channel%i_mass%g_n%i_nf%i_ef%i.xml --stage gen --submit\n' %(channel,mass,n,nf,ef))
+    launcher.write('project.py --xml Xml/Output/gridSettings_channel%i_mass%g_n%i_nf%i_ef%i.xml --stage sim --submit\n' %(channel,mass,n,nf,ef))

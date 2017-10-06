@@ -16,6 +16,7 @@
 <!ENTITY data_dir "&pnfs_dir;/&category;/&name;">
 <!ENTITY work_dir "&grid_dir;/Work/&category;/&name;">
 <!ENTITY log_dir "&data_dir;/Log">
+<!ENTITY upload_dir "&pnfs_dir;/GridFiles/&category;">
 ]>
 
 <job>
@@ -32,29 +33,40 @@
     <!-- Larsoft information -->
     <larsoft>
       <tag>development</tag>
-      <local>&grid_dir;/&category;/LarsoftTar/larsoft_v06_26_01.tar</local>
+      <local>&upload_dir;/larsoft_v06_35_00.tar</local>
     </larsoft>
 
     <!-- Project stages -->
-    <stage name="gen">
-      <fcl>my_textfilegen.fcl</fcl>
+    <stage name="sim">
+      <fcl>&upload_dir;/my_textfilegen.fcl</fcl>
       <fcl>standard_g4_uboone.fcl</fcl>
+      <fcl>standard_detsim_uboone.fcl</fcl>
       <fcldir>&fcl_dir;</fcldir>
       <numjobs>&job_n;</numjobs>
-      <inputlist>&grid_dir;/&category;/TextFiles/Output/Lists/sterileEvents_channel1_mass0.3_n20000_nf1000_ef20.list</inputlist>
+      <inputlist>&upload_dir;/TextFiles/Lists/sterileEvents_channel1_mass0.3_n20000_nf1000_ef20.list</inputlist>
       <inputmode>textfile</inputmode>
-      <outdir>&data_dir;/gen</outdir>
-      <workdir>&work_dir;/gen</workdir>
-      <logdir>&log_dir;/gen</logdir>
+      <outdir>&data_dir;/sim</outdir>
+      <workdir>&work_dir;/sim</workdir>
+      <logdir>&log_dir;/sim</logdir>
+      <jobsub>--jobsub-server=fifebatch1.fnal.gov</jobsub>
     </stage>
 
-    <stage name="sim_trigger">
-      <fcl>standard_detsim_uboone.fcl</fcl>
-      <fcl>swtrigger_HSnu_MC.fcl</fcl>
+    <stage name="trigger">
+      <fcl>&upload_dir;/swtrigger_HSnu_MC.fcl</fcl>
       <numjobs>&job_n;</numjobs>
-      <outdir>&data_dir;/sim_trigger</outdir>
-      <workdir>&work_dir;/sim_trigger</workdir>
-      <logdir>&log_dir;/sim_trigger</logdir>
+      <outdir>&data_dir;/trigger</outdir>
+      <workdir>&work_dir;/trigger</workdir>
+      <logdir>&log_dir;/trigger</logdir>
+    </stage>
+
+    <stage name="reco">
+      <previousstage>sim</previousstage>
+      <fcl>reco_uboone_mcc8_driver_stage1and2.fcl</fcl>
+      <numjobs>&job_n;</numjobs>
+      <outdir>&data_dir;/reco</outdir>
+      <workdir>&work_dir;/reco</workdir>
+      <logdir>&log_dir;/reco</logdir>
+      <jobsub>--expected-lifetime=long</jobsub>
     </stage>
 
     <ubfcl>devel</ubfcl>

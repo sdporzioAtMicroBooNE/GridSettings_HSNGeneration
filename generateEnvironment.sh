@@ -1,6 +1,5 @@
 run 'rm -rf TextFiles/Output/*'
 run 'rm -rf Xml/Output/*'
 run 'rm launchProjects.sh'
-run 'python TextFiles/generateTextFiles.py'
 run 'python Xml/generateXml.py'
 run 'chmod +x launchProjects.sh'
