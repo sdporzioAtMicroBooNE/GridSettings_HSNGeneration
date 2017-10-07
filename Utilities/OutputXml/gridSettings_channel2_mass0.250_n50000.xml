@@ -7,7 +7,7 @@
 <!ENTITY pnfs_dir "/pnfs/uboone/scratch/users/&user;">
 
 <!ENTITY category "HeavySterileNeutrinos">
-<!ENTITY name "sterileEvents_channel2_mass0.300_n50000">
+<!ENTITY name "sterileEvents_channel2_mass0.250_n50000">
 <!ENTITY job_n "2500">
 <!ENTITY event_n "50000">
 
@@ -38,7 +38,7 @@
 
     <!-- Project stages -->
     <stage name="sim">
-      <fcl>&upload_dir;/prodHsn_channel2_mass0.300_n50000.fcl</fcl>
+      <fcl>&upload_dir;/prodHsn_channel2_mass0.250_n50000.fcl</fcl>
       <fcl>standard_g4_uboone.fcl</fcl>
       <fcl>standard_detsim_uboone.fcl</fcl>
       <fcldir>&fcl_dir;</fcldir>
@@ -46,7 +46,7 @@
       <outdir>&data_dir;/sim</outdir>
       <workdir>&work_dir;/sim</workdir>
       <logdir>&log_dir;/sim</logdir>
-      <jobsub> -f /pnfs/uboone/persistent/users/sporzio/HeavySterileNeutrinos/FluxFiles/sterileFlux_m0.300.dat </jobsub> 
+      <jobsub> -f /pnfs/uboone/persistent/users/sporzio/HeavySterileNeutrinos/FluxFiles/sterileFlux_m0.250.dat </jobsub> 
     </stage>
 
     <stage name="trigger">

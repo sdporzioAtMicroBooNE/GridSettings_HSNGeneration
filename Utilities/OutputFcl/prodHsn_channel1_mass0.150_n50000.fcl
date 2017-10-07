@@ -74,5 +74,5 @@ outputs:
 }
 
 physics.producers.generator.DecayChannel:   1
-physics.producers.generator.SterileMass:    0.350
-physics.producers.generator.FluxFile:       "sterileFlux_m0.350.dat"
+physics.producers.generator.SterileMass:    0.150
+physics.producers.generator.FluxFile:       "sterileFlux_m0.150.dat"

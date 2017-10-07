@@ -4,11 +4,11 @@ import os, sys, argparse, shutil
 nEvents = "50000"
 nJobs = str((int(nEvents)/int(20)))
 dataSets = []
-dataSets.append(["1","0.250",nEvents,nJobs])
-dataSets.append(["1","0.350",nEvents,nJobs])
+dataSets.append(["1","0.150",nEvents,nJobs])
+dataSets.append(["1","0.300",nEvents,nJobs])
 dataSets.append(["1","0.450",nEvents,nJobs])
-dataSets.append(["2","0.150",nEvents,nJobs])
-dataSets.append(["2","0.300",nEvents,nJobs])
+dataSets.append(["2","0.250",nEvents,nJobs])
+dataSets.append(["2","0.350",nEvents,nJobs])
 dataSets.append(["2","0.450",nEvents,nJobs])
 
 def Warning(string):
@@ -38,7 +38,7 @@ def GenerateFCL(dataSets):
         fOut.write(textOut)
         fOut.close()
         print "Copying file %i of %i." %(i+1,len(dataSets))
-        shutil.copy2(outDir+'/'+outName,'/pnfs/uboone/scratch/users/sporzio/GridFiles/HeavySterileNeutrinos/'+outName)
+        shutil.copyfile(outDir+'/'+outName,'/pnfs/uboone/scratch/users/sporzio/GridFiles/HeavySterileNeutrinos/'+outName)
 
 def GenerateXML(dataSets):
     Warning('Generating xml files...')
