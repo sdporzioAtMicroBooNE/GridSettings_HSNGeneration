@@ -39,8 +39,8 @@
     <!-- Project stages -->
     <stage name="sim">
       <fcl>&upload_dir;/prodHsn_channel1_mass0.450_n50000.fcl</fcl>
-      <fcl>standard_g4_uboone.fcl</fcl>
-      <fcl>standard_detsim_uboone.fcl</fcl>
+<!--       <fcl>standard_g4_uboone.fcl</fcl>
+      <fcl>standard_detsim_uboone.fcl</fcl> -->
       <fcldir>&fcl_dir;</fcldir>
       <numjobs>&job_n;</numjobs>
       <outdir>&data_dir;/sim</outdir>
