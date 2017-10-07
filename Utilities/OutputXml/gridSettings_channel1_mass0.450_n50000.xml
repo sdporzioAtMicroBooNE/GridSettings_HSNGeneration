@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+
+<!-- Production Project -->
+<!DOCTYPE project [
+<!ENTITY user "sporzio">
+<!ENTITY app_dir "/uboone/app/users/&user;">
+<!ENTITY pnfs_dir "/pnfs/uboone/scratch/users/&user;">
+
+<!ENTITY category "HeavySterileNeutrinos">
+<!ENTITY name "sterileEvents_channel1_mass0.450_n50000">
+<!ENTITY job_n "2500">
+<!ENTITY event_n "50000">
+
+<!ENTITY grid_dir "&app_dir;/GridJob">
+<!ENTITY fcl_dir "&app_dir;/GridJob/&category;/Fcl">
+<!ENTITY data_dir "&pnfs_dir;/&category;/&name;">
+<!ENTITY work_dir "&grid_dir;/Work/&category;/&name;">
+<!ENTITY log_dir "&data_dir;/Log">
+<!ENTITY upload_dir "&pnfs_dir;/GridFiles/&category;">
+]>
+
+<job>
+  <project name="&name;">
+    <group>uboone</group>
+    <numevents>&event_n;</numevents>
+
+    <!-- Operating System -->
+    <os>SL5,SL6</os>
+
+    <!-- Batch resources -->
+    <resource>DEDICATED,OPPORTUNISTIC</resource>
+
+    <!-- Larsoft information -->
+    <larsoft>
+      <tag>development</tag>
+      <local>&upload_dir;/larsoft_v06_48_00.tar</local>
+    </larsoft>
+
+    <!-- Project stages -->
+    <stage name="sim">
+      <fcl>&upload_dir;/prodHsn_channel1_mass0.450_n50000.fcl</fcl>
+      <fcl>standard_g4_uboone.fcl</fcl>
+      <fcl>standard_detsim_uboone.fcl</fcl>
+      <fcldir>&fcl_dir;</fcldir>
+      <numjobs>&job_n;</numjobs>
+      <outdir>&data_dir;/sim</outdir>
+      <workdir>&work_dir;/sim</workdir>
+      <logdir>&log_dir;/sim</logdir>
+      <jobsub> -f /pnfs/uboone/persistent/users/sporzio/HeavySterileNeutrinos/FluxFiles/sterileFlux_m0.450.dat </jobsub> 
+    </stage>
+
+    <stage name="trigger">
+      <fcl>&upload_dir;/swtrigger_HSnu_MC.fcl</fcl>
+      <numjobs>&job_n;</numjobs>
+      <outdir>&data_dir;/trigger</outdir>
+      <workdir>&work_dir;/trigger</workdir>
+      <logdir>&log_dir;/trigger</logdir>
+    </stage>
+
+    <stage name="reco">
+      <previousstage>sim</previousstage>
+      <fcl>reco_uboone_mcc8_driver_stage1and2.fcl</fcl>
+      <numjobs>&job_n;</numjobs>
+      <outdir>&data_dir;/reco</outdir>
+      <workdir>&work_dir;/reco</workdir>
+      <logdir>&log_dir;/reco</logdir>
+      <jobsub>--expected-lifetime=long</jobsub>
+    </stage>
+
+    <ubfcl>devel</ubfcl>
+  </project>
+</job>
