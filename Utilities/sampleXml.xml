@@ -49,6 +49,15 @@
       <jobsub> -f /pnfs/uboone/persistent/users/sporzio/HeavySterileNeutrinos/FluxFiles/sterileFlux_m${MASS}.dat </jobsub> 
     </stage>
 
+    <stage name="sim2">
+      <fcl>standard_g4_uboone.fcl</fcl>
+      <fcl>standard_detsim_uboone.fcl</fcl>
+      <numjobs>&job_n;</numjobs>
+      <outdir>&data_dir;/sim</outdir>
+      <workdir>&work_dir;/sim</workdir>
+      <logdir>&log_dir;/sim</logdir>
+    </stage>
+
     <stage name="trigger">
       <fcl>&upload_dir;/swtrigger_HSnu_MC.fcl</fcl>
       <numjobs>&job_n;</numjobs>
