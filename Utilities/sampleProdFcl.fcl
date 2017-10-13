@@ -76,3 +76,7 @@ outputs:
 physics.producers.generator.DecayChannel:   ${CHANNEL}
 physics.producers.generator.SterileMass:    ${MASS}
 physics.producers.generator.FluxFile:       "sterileFlux_m${MASS}.dat"
+
+# Suggetion by Brandon to get rid of the database issue (not actually used by this module!)
+services.PmtGainService.PmtGainProvider.UseDB: false
+
